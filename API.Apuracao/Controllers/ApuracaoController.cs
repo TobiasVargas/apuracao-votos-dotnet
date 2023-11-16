@@ -21,7 +21,7 @@ namespace API.Apuracao.Controllers
                     CamisaJogador = g.Key.CamisaJogador,
                     NomeJogador = g.Key.NomeJogador,
                     TimeJogador = g.Key.TimeJogador
-                });
+                }).OrderByDescending(a => a.QuantidadeVotos);
             List<ResultadoApuracaoDTO> apuracoes = query.ToList();
             return Ok(apuracoes);
         }

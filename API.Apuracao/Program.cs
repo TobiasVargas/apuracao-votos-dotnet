@@ -20,6 +20,8 @@ builder.Services.AddHostedService<KafkaConsumer>();
 builder.Services.AddHttpClient<JogadoresClient>(service => 
     service.BaseAddress = new Uri(configuration["ServiceUrls:JogadoresApi"]));
 
+builder.Services.Configure<KafkaConfig>(configuration.GetSection("Kafka"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

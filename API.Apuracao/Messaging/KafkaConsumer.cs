@@ -3,6 +3,7 @@ using API.Apuracao.Data;
 using API.Apuracao.Dto;
 using API.Apuracao.Entity;
 using Confluent.Kafka;
+using Microsoft.Extensions.Options;
 using System.Net;
 using System.Text.Json;
 
@@ -14,11 +15,22 @@ namespace API.Apuracao.Messaging
         private readonly JogadoresClient _jogadoresClient;
         private PgContext? _pgContext;
         private readonly IServiceScopeFactory _serviceScopeFactory;
-        public KafkaConsumer(ILogger<KafkaConsumer> logger, JogadoresClient jogadoresClient, IServiceScopeFactory serviceScopeFactory)
+        private readonly ConsumerConfig conf;
+        private readonly IOptions<KafkaConfig> _config;
+
+        public KafkaConsumer(ILogger<KafkaConsumer> logger, JogadoresClient jogadoresClient, IServiceScopeFactory serviceScopeFactory, IOptions<KafkaConfig> config)
         {
             _logger = logger;
             _jogadoresClient = jogadoresClient;
             _serviceScopeFactory = serviceScopeFactory;
+            _config = config;
+
+            this.conf = new ConsumerConfig
+            {
+                GroupId = "apuracao",
+                BootstrapServers = _config.Value.BootstrapServer,
+                AutoOffsetReset = AutoOffsetReset.Earliest
+            };
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -33,14 +45,8 @@ namespace API.Apuracao.Messaging
         private async void ConsumeMessages()
         {
             var scope = _serviceScopeFactory.CreateScope();
-            var conf = new ConsumerConfig
-            {
-                GroupId = "apuracao",
-                BootstrapServers = "localhost:29092",
-                AutoOffsetReset = AutoOffsetReset.Earliest
-            };
-
-            using (var c = new ConsumerBuilder<Ignore, string>(conf).Build())
+            
+            using (var c = new ConsumerBuilder<Ignore, string>(this.conf).Build())
             {
                 c.Subscribe("voto-computado");
                 var cts = new CancellationTokenSource();
