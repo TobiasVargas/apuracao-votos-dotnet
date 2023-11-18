@@ -12,11 +12,6 @@ namespace Frontend.Clients
             _httpClient = httpClient;
         }
 
-        public string GetBaseUrl()
-        {
-            return _httpClient.BaseAddress.ToString();
-        }
-
         public async Task<List<ResultadoApuracaoDTO>> Get()
         {
             var response = await _httpClient.GetAsync("/api/Apuracao");

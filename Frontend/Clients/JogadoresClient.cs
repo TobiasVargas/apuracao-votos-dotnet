@@ -28,10 +28,5 @@ namespace Frontend.Clients
             }
             return jogadores;
         }
-
-        public string GetBaseUrl()
-        {
-            return _httpClient.BaseAddress.ToString();
-        }
     }
 }
