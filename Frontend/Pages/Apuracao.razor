@@ -1,0 +1,71 @@
+﻿@page "/apuracao"
+@using Frontend.Clients
+@using Frontend.Dto
+@inject ApuracaoClient ApuracaoClient;
+
+<PageTitle>Apuração</PageTitle>
+
+@if (campeao != null)
+{
+    <div class="div-campeao">
+        <div>
+            1º Lugar
+        </div>
+        <div class="div-nome-campeao">
+            @campeao.NomeJogador
+        </div>
+    </div>
+    
+}
+
+@if (resultados == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <div class="div-jogadores">
+        @foreach (var resultado in resultados)
+        {
+            <div class="div-jogador shadow border-1 m-1 p-3">
+                <div class="div-quantidade-votos m-1">
+                    @resultado.QuantidadeVotos Votos
+                </div>
+                <div class="div-nome-jogador m-1">
+                    @resultado.NomeJogador
+                </div>
+                <div class="div-camisa-jogador m-1">
+                    @resultado.CamisaJogador
+                </div>
+                <div class="div-time-jogador m-1">
+                    @resultado.TimeJogador
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<ResultadoApuracaoDTO>? resultados;
+    private ResultadoApuracaoDTO? campeao;
+
+    protected override async Task OnInitializedAsync()
+    {
+        resultados = await ApuracaoClient.Get();
+
+        if (resultados.Count == 1)
+        {
+            campeao = resultados[0];
+            return;
+        }
+
+        if (resultados.Count > 1)
+        {
+            var campeaoEncontrado = resultados[0];
+            if (campeaoEncontrado.QuantidadeVotos > resultados[1].QuantidadeVotos)
+            {
+                campeao = campeaoEncontrado;
+            }
+        }
+    }
+}

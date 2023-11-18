@@ -5,9 +5,11 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Jogadores", "API.Jogadores\API.Jogadores.csproj", "{AF879A13-4E48-46AF-B149-4742B82F6051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Votos", "Api.Votos\Api.Votos.csproj", "{59A0E7D0-DFBA-4AEA-A9A0-F014DE1D1C7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Votos", "Api.Votos\Api.Votos.csproj", "{59A0E7D0-DFBA-4AEA-A9A0-F014DE1D1C7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Apuracao", "API.Apuracao\API.Apuracao.csproj", "{D117877F-CCDD-41D5-BF53-01D080E10D6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Apuracao", "API.Apuracao\API.Apuracao.csproj", "{D117877F-CCDD-41D5-BF53-01D080E10D6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{E886DCBE-EA17-4975-A95A-01D0C95F936E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D117877F-CCDD-41D5-BF53-01D080E10D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D117877F-CCDD-41D5-BF53-01D080E10D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D117877F-CCDD-41D5-BF53-01D080E10D6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E886DCBE-EA17-4975-A95A-01D0C95F936E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E886DCBE-EA17-4975-A95A-01D0C95F936E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E886DCBE-EA17-4975-A95A-01D0C95F936E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E886DCBE-EA17-4975-A95A-01D0C95F936E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
